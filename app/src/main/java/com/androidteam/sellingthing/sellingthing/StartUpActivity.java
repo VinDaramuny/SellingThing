@@ -25,7 +25,7 @@ public class StartUpActivity extends AppCompatActivity {
 
     }
     private void startSignInActivity(){
-        Intent intent = new Intent(this,SignInActivity.class);
+        Intent intent = new Intent(this,HomeActivity.class);
         startActivity(intent);
 
     }
