@@ -2,18 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="#419FD9"
+    android:background="#086A73"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:orientation="vertical">
+
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_margin="15dp"
+            android:id="@+id/pf"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/pf"
-            android:src="@drawable/ic_user_pf"/>
+            android:layout_margin="15dp"
+            android:src="@drawable/account_icon" />
     </LinearLayout>
 
     <RelativeLayout
@@ -24,17 +28,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Va Hongly"
+            android:text="Log In/Join With us"
             android:id="@+id/user_name"
             android:textColor="#FFFFFF"
             android:textSize="20dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+85587498210"
-            android:textColor="#FFFFFF"
-            android:id="@+id/phone_num"
-            android:textSize="15dp"
-            android:layout_below="@+id/user_name"/>
+
     </RelativeLayout>
 </LinearLayout>

@@ -2,10 +2,59 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/group1">
         <item
+            android:id="@+id/home"
+            android:icon="@drawable/home_icon"
+            android:title="Home"
+            />
+        <item
+            android:id="@+id/account"
+            android:icon="@drawable/account_icon"
+            android:title="My Acoount"
+            />
+        <item
+            android:id="@+id/orderlist"
+            android:icon="@drawable/order_icon"
+            android:title="My Orders"
+            />
+        <item
+            android:id="@+id/shop"
+            android:icon="@drawable/shopping"
+            android:title="Shopping Chart"
+            />
+        <item
+            android:id="@+id/myfavorites"
+            android:icon="@drawable/love_icon"
+            android:title="My Favorites"
+            />
+        <item
+            android:id="@+id/mywallet"
+            android:icon="@drawable/wallet"
+            android:title="My Wallet"
+            />
+        <item
+            android:id="@+id/messages"
+            android:icon="@drawable/message"
+            android:title="Messages"
+            />
+    </group>
+    <item android:title="view">
+        <item
             android:id="@+id/setting"
             android:icon="@drawable/ic_setting"
             android:title="setting"
             />
-
+    </item>
+    <group>
+        <item
+            android:id="@+id/appsuggestion"
+            android:icon="@drawable/recomment"
+            android:title="App Suggestion"
+            />
+        <item
+            android:id="@+id/costomerservice"
+            android:icon="@drawable/costoms"
+            android:title="Costomer Service"
+            />
     </group>
+
 </menu>
