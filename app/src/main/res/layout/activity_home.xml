@@ -23,32 +23,33 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
         </FrameLayout>
-    <android.support.design.widget.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tablayout"
-        android:background="@color/colorActionBar"
-        android:minHeight="?attr/actionBarSize"
 
-        >
-
-    </android.support.design.widget.TabLayout>
     <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/drawer">
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/recycler_view"-->
-            <!--android:scrollbars="vertical">-->
-        <!--</android.support.v7.widget.RecyclerView>-->
-        <android.support.v4.view.ViewPager
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/pager">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+           <android.support.design.widget.TabLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tablayout"
+               android:background="@color/colorActionBar"
+               android:minHeight="?attr/actionBarSize"
 
-        </android.support.v4.view.ViewPager>
+               >
+
+           </android.support.design.widget.TabLayout>
+           <android.support.v4.view.ViewPager
+               android:layout_width="match_parent"
+               android:layout_height="fill_parent"
+               android:id="@+id/pager">
+
+           </android.support.v4.view.ViewPager>
+       </LinearLayout>
+
         <android.support.design.widget.NavigationView
             android:id="@+id/nav"
             android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
 
 
         </android.support.design.widget.NavigationView>
-        
+
 
     </android.support.v4.widget.DrawerLayout>
 
