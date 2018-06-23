@@ -106,11 +106,6 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
 
     }
 
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -130,10 +125,4 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
 }
