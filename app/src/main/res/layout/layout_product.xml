@@ -14,7 +14,7 @@
         android:elevation="3dp"
         cardCornerRadius="0dp">
 
-        
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -25,7 +25,8 @@
                 android:layout_height="160dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:src="@drawable/fashion"/>
 
             <TextView
                 android:id="@+id/textViewTitle"
@@ -36,17 +37,30 @@
                 android:paddingRight="10dp"
                 android:paddingTop="10dp"
                 android:textSize="15dp"
+                android:text="titler"
+                android:textAlignment="center"
+
                 />
 
             <TextView
-                android:id="@+id/count"
+                android:id="@+id/textViewPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewTitle"
                 android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:textColor="#EA4234"
+                android:textAlignment="center"
+                android:text="$100"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#086A73"
+                android:text="Add to Cart"
+                android:textColor="#FFFF"
+                android:layout_below="@+id/textViewPrice"/>
 
 
 

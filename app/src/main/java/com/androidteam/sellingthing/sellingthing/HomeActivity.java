@@ -56,9 +56,10 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         searchView = findViewById(R.id.search_view);
 
         TabLayout tabLayout = findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab1"));
+        tabLayout.addTab(tabLayout.newTab().setText("Explore"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab2"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab3"));
+        tabLayout.setTabTextColors(getResources().getColor(R.color.colorWhite),getResources().getColor(R.color.select));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
