@@ -1,7 +1,9 @@
 package com.androidteam.sellingthing.sellingthing;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import com.bumptech.glide.Glide;
 
@@ -46,7 +49,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 //        TextView productRate;
 //        TextView productPrice;
         ImageView productImg;
-        LinearLayout linearLayout;
+        LinearLayout parentLayout;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -55,7 +59,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 //            productRate = itemView.findViewById(R.id.textViewRating);
 //            productPrice = itemView.findViewById(R.id.textViewPrice);
             productImg = itemView.findViewById(R.id.imageviewproduct);
-            linearLayout = itemView.findViewById(R.id.parentLayout);
+            parentLayout = itemView.findViewById(R.id.parentLayout);
+            cardView = itemView.findViewById(R.id.card_view);
         }
     }
     @NonNull
@@ -67,13 +72,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.productTitle.setText(title.get(position));
 //        holder.productDesc.setText(desc.get(position));
 //        holder.productRate.setText(rate.get(position));
 //        holder.productPrice.setText(price.get(position));
         //Glide.with(mContext).asBitmap().load(imageUrl.get(position)).into(holder.productImg);
         Glide.with(mContext).asBitmap().load(imageUrl.get(position)).into(holder.productImg);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, title.get(position), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, DetailActivity.class);
+//                intent.putExtra("image_url", mImages.get(position));
+//                intent.putExtra("image_name", mImageNames.get(position));
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
