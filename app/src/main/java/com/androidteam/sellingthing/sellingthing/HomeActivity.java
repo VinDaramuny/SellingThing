@@ -52,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
+
         toggle.syncState();
         searchView = findViewById(R.id.search_view);
 
@@ -83,13 +84,6 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
             }
         });
 
-
-//        insertItem();
-//        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-//        ProductAdapter productAdapter = new ProductAdapter(productImg,productTitle,productDesc,productRate,productPrice,this);
-//
-//        recyclerView.setAdapter(productAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void insertItem(){

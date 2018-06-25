@@ -38,7 +38,7 @@ public class Tab1Fragment extends Fragment {
     private ArrayList<String> productRate = new ArrayList<>();
     private ArrayList<String> productPrice = new ArrayList<>();
     private ArrayList<String> productImg = new ArrayList<>();
-    int[] sampleImages = {R.drawable.electronic,R.drawable.fashion,R.drawable.sport,R.drawable.camera};
+    int[] sampleImages = {R.drawable.electronic,R.drawable.fashion};
 
 
 

@@ -11,8 +11,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+           >
 
             <ImageView
                 android:id="@+id/bag"
@@ -28,7 +27,7 @@
             android:text="Prado Bag"
             android:textSize="30dp"
             android:textAlignment="center"
-            android:textColor="#000000" />
+            android:textColor="#086A73" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$80"
-                    android:textSize="30dp"
+                    android:textSize="20dp"
                     android:textColor="#086A73"/>
             </LinearLayout>
 
@@ -77,14 +76,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:text="Detail"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:textColor="#086A73"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="5dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Crafted with durable leather, this double top handle leather bag features a removable shoulder strap, top zipper closure and includes an internal zip pocket compartment."
-                android:textSize="20dp"
+                android:textSize="15dp"
                 />
 
         </LinearLayout>
@@ -99,14 +98,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:text="Color"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:textColor="#086A73"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="5dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Black"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 />
 
         </LinearLayout>
@@ -121,14 +120,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:text="Size"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:textColor="#086A73"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="5dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="30ml"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 />
 
         </LinearLayout>
@@ -143,14 +142,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:text="Available"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:textColor="#086A73"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="5dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="40 item Available"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 />
 
         </LinearLayout>
@@ -162,7 +161,8 @@
             android:text="ADD TO CART"
             android:textColor="#ffff"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"/>
 
 
     </LinearLayout>
