@@ -15,16 +15,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFragmentInteractionListener,Tab2Fragment.OnFragmentInteractionListener,Tab3Fragment.OnFragmentInteractionListener{
-    private ArrayList<String> productTitle = new ArrayList<>();
-    private ArrayList<String> productDesc= new ArrayList<>();
-    private ArrayList<String> productRate = new ArrayList<>();
-    private ArrayList<String> productPrice = new ArrayList<>();
-    private ArrayList<String> productImg = new ArrayList<>();
+    int[] sampleImages = {R.drawable.electronic,R.drawable.fashion,R.drawable.sport,R.drawable.camera};
+
 
     private MaterialSearchView searchView;
     private DrawerLayout drawerLayout;
@@ -45,7 +46,9 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-
+        CarouselView carouselView = findViewById(R.id.carouselview);
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
 
 
         drawerLayout = findViewById(R.id.drawer);
@@ -60,6 +63,7 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         tabLayout.addTab(tabLayout.newTab().setText("Explore"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab2"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab3"));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorWhite));
         tabLayout.setTabTextColors(getResources().getColor(R.color.colorWhite),getResources().getColor(R.color.select));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -85,21 +89,13 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         });
 
     }
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
 
-    public void insertItem(){
-        productTitle.add("Coca Cola");
-        productDesc.add("original taste");
-        productRate.add("5");
-        productPrice.add("2500");
-        productImg.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-
-        productTitle.add("Coca Cola");
-        productDesc.add("original taste");
-        productRate.add("5");
-        productPrice.add("2500");
-        productImg.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

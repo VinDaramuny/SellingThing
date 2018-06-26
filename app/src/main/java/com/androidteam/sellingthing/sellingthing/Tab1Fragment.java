@@ -17,6 +17,7 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -32,13 +33,12 @@ public class Tab1Fragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private RecyclerView recyclerView;
+    private ProductAdapter productAdapter;
 
-    private ArrayList<String> productTitle = new ArrayList<>();
-    private ArrayList<String> productDesc= new ArrayList<>();
-    private ArrayList<String> productRate = new ArrayList<>();
-    private ArrayList<String> productPrice = new ArrayList<>();
-    private ArrayList<String> productImg = new ArrayList<>();
-    int[] sampleImages = {R.drawable.electronic,R.drawable.fashion};
+
+   private List<Product> productList = new ArrayList<>();
+    int[] sampleImages = {R.drawable.electronic,R.drawable.fashion,R.drawable.sport,R.drawable.camera};
 
 
 
@@ -85,19 +85,19 @@ public class Tab1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tab1,container,false);
-        CarouselView carouselView = view.findViewById(R.id.carouselview);
-        carouselView.setPageCount(sampleImages.length);
-        carouselView.setImageListener(imageListener);
 
-        insertItem();
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        ProductAdapter productAdapter = new ProductAdapter(productImg,productTitle,getActivity());
+
+
+        recyclerView = view.findViewById(R.id.recycler_view);
+        productAdapter = new ProductAdapter(productList,getActivity());
 
         recyclerView.setAdapter(productAdapter);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2,8,true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(layoutManager);
+
+        insertItem();
         return view;
     }
     ImageListener imageListener = new ImageListener() {
@@ -107,17 +107,23 @@ public class Tab1Fragment extends Fragment {
         }
     };
     public void insertItem(){
-        productTitle.add("Coca Cola");
-        productDesc.add("original taste");
-        productRate.add("5");
-        productPrice.add("2500");
-        productImg.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
 
-        productTitle.add("Coca Cola 1");
-        productDesc.add("original taste");
-        productRate.add("4");
-        productPrice.add("2000");
-        productImg.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        Product product = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        Product product1 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        Product product2 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        Product product3 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        Product product4 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        Product product5 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        Product product6 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+        productList.add(product);
+        productList.add(product1);
+        productList.add(product2);
+        productList.add(product3);
+        productList.add(product4);
+        productList.add(product5);
+        productList.add(product6);
+
+        productAdapter.notifyDataSetChanged();
 
     }
     // TODO: Rename method, update argument and hook method into UI event

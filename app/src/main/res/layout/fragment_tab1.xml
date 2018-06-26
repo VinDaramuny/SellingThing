@@ -8,18 +8,7 @@
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <com.synnapps.carouselview.CarouselView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/carouselview"
-        app:fillColor="#FFFFFFFF"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="3000"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp">
 
-    </com.synnapps.carouselview.CarouselView>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
