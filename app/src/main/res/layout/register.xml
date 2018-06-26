@@ -4,6 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:background="#076972"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backarrow"/>
+
+        <TextView
+            android:textColor="#ffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selling Thing"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/toolbar"
         android:id="@+id/rEmail"
         android:layout_width="match_parent"
         android:layout_height="40dp"
