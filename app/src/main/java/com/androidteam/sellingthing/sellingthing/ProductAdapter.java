@@ -18,10 +18,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>{
-    private ArrayList<String> imageUrl = new ArrayList<>();
-    private ArrayList<String> title = new ArrayList<>();
+    private List<Product> productList;
+
 //    private ArrayList<String> desc = new ArrayList<>();
 //    private ArrayList<String> rate = new ArrayList<>();
 //    private ArrayList<String> price = new ArrayList<>();
@@ -37,9 +38,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 //    }
 
 
-    public ProductAdapter(ArrayList<String> imageUrl, ArrayList<String> title, Context mContext) {
-        this.imageUrl = imageUrl;
-        this.title = title;
+    public ProductAdapter(List<Product> productList, Context mContext) {
+        this.productList = productList;
         this.mContext = mContext;
     }
 
@@ -74,16 +74,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
 
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.productTitle.setText(title.get(position));
-//        holder.productDesc.setText(desc.get(position));
-//        holder.productRate.setText(rate.get(position));
-//        holder.productPrice.setText(price.get(position));
-        //Glide.with(mContext).asBitmap().load(imageUrl.get(position)).into(holder.productImg);
-        Glide.with(mContext).asBitmap().load(imageUrl.get(position)).into(holder.productImg);
+//        holder.productTitle.setText(title.get(position));
+//        Glide.with(mContext).asBitmap().load(imageUrl.get(position)).into(holder.productImg);
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext, title.get(position), Toast.LENGTH_SHORT).show();
+//
+//                Intent intent = new Intent(mContext, DetailActivity.class);
+////                intent.putExtra("image_url", mImages.get(position));
+////                intent.putExtra("image_name", mImageNames.get(position));
+//                mContext.startActivity(intent);
+//            }
+//        }
+        final Product product = productList.get(position);
+        holder.productTitle.setText(product.getTitle());
+        Glide.with(mContext).asBitmap().load(product.getImgUrl()).into(holder.productImg);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, title.get(position), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(mContext,product.getTitle(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, DetailActivity.class);
 //                intent.putExtra("image_url", mImages.get(position));
@@ -96,6 +107,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return title.size();
+        return productList.size();
     }
 }
