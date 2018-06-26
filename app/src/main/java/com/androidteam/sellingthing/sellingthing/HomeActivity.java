@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -30,6 +32,7 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
     private MaterialSearchView searchView;
     private DrawerLayout drawerLayout;
 
+
     @Override
     public void onFragmentInteraction(Uri uri) {
 
@@ -39,6 +42,10 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -15,7 +15,7 @@ public class Product {
         this.price = price;
         this.imgUrl = imgUrl;
     }
-
+    public Product(){}
     public String getTitle() {
         return title;
     }
@@ -55,4 +55,5 @@ public class Product {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
 }

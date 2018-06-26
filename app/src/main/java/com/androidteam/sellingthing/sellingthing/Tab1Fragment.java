@@ -1,8 +1,11 @@
 package com.androidteam.sellingthing.sellingthing;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -36,8 +45,12 @@ public class Tab1Fragment extends Fragment {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
 
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private ProgressDialog progressDialog;
 
-   private List<Product> productList = new ArrayList<>();
+
+    private List<Product> productList = new ArrayList<>();
     int[] sampleImages = {R.drawable.electronic,R.drawable.fashion,R.drawable.sport,R.drawable.camera};
 
 
@@ -89,15 +102,71 @@ public class Tab1Fragment extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        productAdapter = new ProductAdapter(productList,getActivity());
 
-        recyclerView.setAdapter(productAdapter);
+
+
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2,8,true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(layoutManager);
+        progressDialog = new ProgressDialog(getActivity());
 
-        insertItem();
+        progressDialog.setMessage("Loading Data from Firebase Database");
+
+        progressDialog.show();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference().child("Product");
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                productList.add(dataSnapshot.getValue(Product.class));
+
+                productAdapter = new ProductAdapter(productList,getActivity());
+                recyclerView.setAdapter(productAdapter);
+                progressDialog.dismiss();
+                productAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot dataSnapshot1 :  dataSnapshot.getChildren()){
+//                    Product product = dataSnapshot1.getValue(Product.class);
+//                    productList.add(product);
+//
+//                }
+//                productAdapter = new ProductAdapter(productList,getActivity());
+//                recyclerView.setAdapter(productAdapter);
+//                progressDialog.dismiss();
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                progressDialog.dismiss();
+//
+//            }
+//        });
+
+        //insertItem();
         return view;
     }
     ImageListener imageListener = new ImageListener() {
@@ -106,26 +175,29 @@ public class Tab1Fragment extends Fragment {
             imageView.setImageResource(sampleImages[position]);
         }
     };
-    public void insertItem(){
-
-        Product product = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-        Product product1 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-        Product product2 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-        Product product3 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-        Product product4 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-        Product product5 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-        Product product6 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
-        productList.add(product);
-        productList.add(product1);
-        productList.add(product2);
-        productList.add(product3);
-        productList.add(product4);
-        productList.add(product5);
-        productList.add(product6);
-
-        productAdapter.notifyDataSetChanged();
-
-    }
+//    public void insertItem(){
+//
+//        database = FirebaseDatabase.getInstance();
+//        reference = database.getReference("Product");
+//
+//        Product product = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+//        Product product1 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+//        Product product2 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+//        Product product3 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+//        Product product4 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+//        Product product5 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+//        Product product6 = new Product("Coca cola","popular dink ","5","$ 0.5","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5aa-4LErrHYE4jwpVr39dWEDDkpUSzVFMIubpVdRW8gHkJ1d1GA");
+//        productList.add(product);
+//        productList.add(product1);
+//        productList.add(product2);
+//        productList.add(product3);
+//        productList.add(product4);
+//        productList.add(product5);
+//        productList.add(product6);
+//
+//        productAdapter.notifyDataSetChanged();
+//
+//    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
