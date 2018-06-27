@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "400329557033",
+    "firebase_url": "https://sellingthing-6f39c.firebaseio.com",
+    "project_id": "sellingthing-6f39c",
+    "storage_bucket": "sellingthing-6f39c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400329557033:android:48c65e58dc011b4c",
+        "android_client_info": {
+          "package_name": "com.androidteam.sellingthing.sellingthing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400329557033-of3hvm15lecm5k9bc7sokh1p6bqf800g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.androidteam.sellingthing.sellingthing",
+            "certificate_hash": "8089196b2dd19b3dbc126865a36bfff8c4978445"
+          }
+        },
+        {
+          "client_id": "400329557033-2stbmvn4osvphibvd5dnhpqg5qjrr76m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0VmbW06fuoUHS1f2KGvr2k3uQhuknaGc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400329557033-2stbmvn4osvphibvd5dnhpqg5qjrr76m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

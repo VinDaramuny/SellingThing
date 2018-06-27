@@ -94,7 +94,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,product.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,product.getImgUrl(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, DetailActivity.class);
 //                intent.putExtra("image_url", mImages.get(position));
