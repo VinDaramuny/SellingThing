@@ -4,26 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
@@ -38,7 +29,7 @@ import java.util.List;
  * Use the {@link Tab1Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Tab1Fragment extends Fragment {
+public class ExploreTabFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -46,12 +37,7 @@ public class Tab1Fragment extends Fragment {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
 
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
-    private ProgressDialog progressDialog;
-
-
-    final private List<Product> productList = new ArrayList<>();
+    private List<Product> productList = new ArrayList<>();
     int[] sampleImages = {R.drawable.electronic,R.drawable.fashion,R.drawable.sport,R.drawable.camera};
 
 
@@ -62,7 +48,7 @@ public class Tab1Fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Tab1Fragment() {
+    public ExploreTabFragment() {
         // Required empty public constructor
     }
 
@@ -74,8 +60,8 @@ public class Tab1Fragment extends Fragment {
      * @return A new instance of fragment Tab1Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Tab1Fragment newInstance() {
-        Tab1Fragment fragment = new Tab1Fragment();
+    public static ExploreTabFragment newInstance() {
+        ExploreTabFragment fragment = new ExploreTabFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -95,66 +81,17 @@ public class Tab1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tab1,container,false);
-
-
-
+        View view = inflater.inflate(R.layout.fragment_explore_tab,container,false);
         recyclerView = view.findViewById(R.id.recycler_view);
-
-
-
+        productList = (List<Product>) getArguments().getSerializable("Products");
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2,8,true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(layoutManager);
-        progressDialog = new ProgressDialog(getActivity());
-
-        progressDialog.setMessage("Loading Data from Firebase Database");
-
-        progressDialog.show();
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference().child("Product");
-        reference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                productList.add(dataSnapshot.getValue(Product.class));
-                Log.d("Tab1","data");
-                productAdapter = new ProductAdapter(productList,getActivity());
-                recyclerView.setAdapter(productAdapter);
-                progressDialog.dismiss();
-                productAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Product product =dataSnapshot.getValue(Product.class);
-                int index = getItemIndex(product);
-                productList.set(index,product);
+        productAdapter = new ProductAdapter(productList,getActivity());
+        recyclerView.setAdapter(productAdapter);
 
 
-                //progressDialog.dismiss();
-                productAdapter.notifyItemChanged(index);
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Product product =dataSnapshot.getValue(Product.class);
-                int index = getItemIndex(product);
-                productList.remove(index);
-                productAdapter.notifyItemRemoved(index);
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 //        reference.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -178,24 +115,14 @@ public class Tab1Fragment extends Fragment {
         return view;
     }
 
-    private int getItemIndex(Product product){
-        int index = 0;
-        for(int i = 0;i<productList.size();i++){
-            if(productList.get(i).equals(product)){
-                index = 1;
-                break;
-            }
-        }
-        return index;
 
-    }
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
             imageView.setImageResource(sampleImages[position]);
         }
     };
-//    public void insertItem(){
+    //    public void insertItem(){
 //
 //        database = FirebaseDatabase.getInstance();
 //        reference = database.getReference("Product");

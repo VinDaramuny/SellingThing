@@ -1,6 +1,11 @@
 package com.androidteam.sellingthing.sellingthing;
 
+import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.design.internal.NavigationMenuItemView;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -13,9 +18,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,15 +31,22 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFragmentInteractionListener,Tab2Fragment.OnFragmentInteractionListener,Tab3Fragment.OnFragmentInteractionListener{
+public class HomeActivity extends AppCompatActivity implements ExploreTabFragment.OnFragmentInteractionListener
+        ,Tab2Fragment.OnFragmentInteractionListener
+        ,Tab3Fragment.OnFragmentInteractionListener
+        , NavigationView.OnNavigationItemSelectedListener{
+
     int[] sampleImages = {R.drawable.electronic,R.drawable.fashion,R.drawable.sport,R.drawable.camera};
-
-
     private MaterialSearchView searchView;
     private DrawerLayout drawerLayout;
+    private List<Product> productList;
 
-
+    private boolean mUserLearnedDrawer;
+    private boolean mFromSavedInstanceState;
+    private int mCurrentSelectedPosition;
+    
     @Override
     public void onFragmentInteraction(Uri uri) {
 
@@ -43,7 +57,18 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Intent getProducts = getIntent();
+        productList = (List<Product>) getProducts.getSerializableExtra("Products");
+        Log.d("Home Activity", String.valueOf(productList.size()));
 
+        NavigationView navigationView = findViewById(R.id.nav);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+        if (savedInstanceState != null) {
+            mCurrentSelectedPosition = savedInstanceState.getInt("selected_navigation_drawer_position");
+            mFromSavedInstanceState = true;
+        }
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -59,6 +84,9 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
 
 
         drawerLayout = findViewById(R.id.drawer);
+
+
+
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
@@ -75,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
-        final  PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        final  PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(), productList);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -117,10 +145,26 @@ public class HomeActivity extends AppCompatActivity implements Tab1Fragment.OnFr
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+            case R.id.nav_home:
+                Toast.makeText(this, "thissssssss", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.nav_home:
+
+//                StartUpActivity(new Intent(this,HomeActivity.class));
+                //startActivity(new Intent(HomeActivity.this,StartUpActivity.class));
+                drawerLayout.closeDrawers();
+
+                return true;
+        }
+        return false;
     }
 }

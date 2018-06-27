@@ -100,6 +100,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 Toast.makeText(mContext,product.getPrice(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("product_detail",product);
 //                intent.putExtra("image_url", mImages.get(position));
 //                intent.putExtra("image_name", mImageNames.get(position));
                 mContext.startActivity(intent);

@@ -36,21 +36,24 @@
 
             <ImageView
                 android:layout_below="@+id/toolbar"
-                android:id="@+id/bag"
+                android:id="@+id/imageViewProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:src="@drawable/bag" />
+                android:src="@drawable/logoproject"
+                />
         </RelativeLayout>
         <TextView
-            android:layout_below="@+id/bag"
+            android:id="@+id/textViewProductTitle"
+            android:layout_below="@+id/imageViewProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Prado Bag"
             android:textSize="30dp"
+            android:text="title"
             android:textAlignment="center"
-            android:textColor="#086A73" />
+            android:textColor="#086A73"
+
+           />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,10 +68,11 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textViewProductPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
-                    android:text="$80"
+                    android:text="price"
                     android:textSize="20dp"
                     android:textColor="#086A73"/>
             </LinearLayout>
@@ -82,7 +86,8 @@
                     android:layout_marginTop="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/like"/>
+                    android:src="@drawable/like"
+                    />
             </LinearLayout>
 
         </LinearLayout>
@@ -102,9 +107,10 @@
                 android:textColor="#086A73"
                 android:layout_marginBottom="5dp"/>
             <TextView
+                android:id="@+id/textViewProductDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crafted with durable leather, this double top handle leather bag features a removable shoulder strap, top zipper closure and includes an internal zip pocket compartment."
+                android:text="description"
                 android:textSize="15dp"
                 />
 
