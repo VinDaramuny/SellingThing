@@ -11,6 +11,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class Tab1Fragment extends Fragment {
     private ProgressDialog progressDialog;
 
 
-    private List<Product> productList = new ArrayList<>();
+    final private List<Product> productList = new ArrayList<>();
     int[] sampleImages = {R.drawable.electronic,R.drawable.fashion,R.drawable.sport,R.drawable.camera};
 
 
@@ -69,16 +70,13 @@ public class Tab1Fragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+
      * @return A new instance of fragment Tab1Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Tab1Fragment newInstance(String param1, String param2) {
+    public static Tab1Fragment newInstance() {
         Tab1Fragment fragment = new Tab1Fragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -120,7 +118,7 @@ public class Tab1Fragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 productList.add(dataSnapshot.getValue(Product.class));
-
+                Log.d("Tab1","data");
                 productAdapter = new ProductAdapter(productList,getActivity());
                 recyclerView.setAdapter(productAdapter);
                 progressDialog.dismiss();
@@ -129,12 +127,22 @@ public class Tab1Fragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Product product =dataSnapshot.getValue(Product.class);
+                int index = getItemIndex(product);
+                productList.set(index,product);
+
+
+                //progressDialog.dismiss();
+                productAdapter.notifyItemChanged(index);
 
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                Product product =dataSnapshot.getValue(Product.class);
+                int index = getItemIndex(product);
+                productList.remove(index);
+                productAdapter.notifyItemRemoved(index);
             }
 
             @Override
@@ -168,6 +176,18 @@ public class Tab1Fragment extends Fragment {
 
         //insertItem();
         return view;
+    }
+
+    private int getItemIndex(Product product){
+        int index = 0;
+        for(int i = 0;i<productList.size();i++){
+            if(productList.get(i).equals(product)){
+                index = 1;
+                break;
+            }
+        }
+        return index;
+
     }
     ImageListener imageListener = new ImageListener() {
         @Override

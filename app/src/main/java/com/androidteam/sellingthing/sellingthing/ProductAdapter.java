@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>{
-    private List<Product> productList;
+    final private List<Product> productList;
 
 //    private ArrayList<String> desc = new ArrayList<>();
 //    private ArrayList<String> rate = new ArrayList<>();
@@ -49,6 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 //        TextView productRate;
 //        TextView productPrice;
         ImageView productImg;
+        TextView productPrice;
         LinearLayout parentLayout;
         CardView cardView;
 
@@ -61,6 +62,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             productImg = itemView.findViewById(R.id.imageviewproduct);
             parentLayout = itemView.findViewById(R.id.parentLayout);
             cardView = itemView.findViewById(R.id.card_view);
+            productPrice = itemView.findViewById(R.id.textViewPrice);
         }
     }
     @NonNull
@@ -89,12 +91,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 //        }
         final Product product = productList.get(position);
         holder.productTitle.setText(product.getTitle());
+        holder.productPrice.setText(product.getPrice());
         Glide.with(mContext).asBitmap().load(product.getImgUrl()).into(holder.productImg);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,product.getImgUrl(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,product.getPrice(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, DetailActivity.class);
 //                intent.putExtra("image_url", mImages.get(position));

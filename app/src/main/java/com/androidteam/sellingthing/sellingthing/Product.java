@@ -1,6 +1,8 @@
 package com.androidteam.sellingthing.sellingthing;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     private String title;
     private String desc;
