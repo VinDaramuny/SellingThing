@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity"
+    tools:context=".AuthenticationActivity"
     android:background="#FFFF">
     <LinearLayout
         android:id="@+id/toolbar"
@@ -15,8 +15,7 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="80dp"
+            android:id="@+id/btnBackSignIn"           android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:src="@drawable/backarrow"/>
 

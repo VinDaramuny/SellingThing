@@ -57,6 +57,7 @@ public class StartUpActivity extends AppCompatActivity implements OnRetriveListe
     }
     private void startSignInActivity(){
         Intent intent = new Intent(this,HomeActivity.class);
+        Intent intent1 = new Intent(this,HomeActivity.class);
         startActivity(intent);
     }
     private int getItemIndex(Product product){

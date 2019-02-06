@@ -21,7 +21,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +48,7 @@ public class HomeActivity extends AppCompatActivity implements ExploreTabFragmen
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
     private int mCurrentSelectedPosition;
+
     
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -59,10 +62,18 @@ public class HomeActivity extends AppCompatActivity implements ExploreTabFragmen
 
         Intent getProducts = getIntent();
         productList = (List<Product>) getProducts.getSerializableExtra("Products");
-        Log.d("Home Activity", String.valueOf(productList.size()));
+
 
         NavigationView navigationView = findViewById(R.id.nav);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        TextView signIn = headerView.findViewById(R.id.header_user_name);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,AuthenticationActivity.class));
+            }
+        });
 
 
         if (savedInstanceState != null) {
@@ -142,7 +153,7 @@ public class HomeActivity extends AppCompatActivity implements ExploreTabFragmen
         return true;
     }
 
-    @Override
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
@@ -150,7 +161,7 @@ public class HomeActivity extends AppCompatActivity implements ExploreTabFragmen
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 
     @Override
@@ -159,8 +170,14 @@ public class HomeActivity extends AppCompatActivity implements ExploreTabFragmen
         {
             case R.id.nav_home:
 
-//                StartUpActivity(new Intent(this,HomeActivity.class));
-                //startActivity(new Intent(HomeActivity.this,StartUpActivity.class));
+
+                Intent intent = getIntent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+
+
                 drawerLayout.closeDrawers();
 
                 return true;

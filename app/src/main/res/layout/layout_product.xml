@@ -25,6 +25,7 @@
                 android:layout_height="160dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+
                 android:scaleType="fitXY"
                 android:src="@drawable/fashion"/>
 
@@ -36,8 +37,8 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="10dp"
-                android:textSize="15dp"
-                android:text="titler"
+                android:textSize="15Sp"
+                android:text="title"
                 android:textAlignment="center"
 
                 />

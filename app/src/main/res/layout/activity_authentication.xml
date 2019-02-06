@@ -26,6 +26,7 @@
             android:textColor="#ffffff"
             android:textSize="18dp"
             android:textStyle="bold"
+            android:id="@+id/auth_signin_fb"
             />
     </LinearLayout>
     <LinearLayout
@@ -41,6 +42,7 @@
 
         <Button
 
+            android:id="@+id/auth_signin_google"
             android:layout_width="match_parent"
             android:paddingLeft="20dp"
             android:layout_height="60dp"
@@ -75,6 +77,7 @@
 
 
         <Button
+            android:id="@+id/auth_signin"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
@@ -87,6 +90,7 @@
             android:textStyle="bold"/>
 
         <Button
+            android:id="@+id/auth_register"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
